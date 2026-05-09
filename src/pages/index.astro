@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-// Component Imports
+import { CATEGORIES } from '../content.config';
 import CallToAction from '../components/CallToAction.astro';
-// Page section components
 import ContactCTA from '../components/ContactCTA.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
@@ -10,16 +9,15 @@ import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Skills from '../components/Skills.astro';
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection('work'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+// 精选项目：featured = true 优先；其余按发布时间倒序，最多展示 4 个
+const allProjects = await getCollection('work');
+const featured = allProjects.filter((p) => p.data.featured);
+const others = allProjects
+	.filter((p) => !p.data.featured)
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const projects = [...featured, ...others].slice(0, 4);
 ---
 
 <BaseLayout>
@@ -27,22 +25,23 @@ const projects = (await getCollection('work'))
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Hello, my name is Jeanine White"
-					tagline="I am a Creative Developer who is currently based in Portland, Oregon."
+					title="李想林 / Xianglin Li"
+					tagline="UX/UI 设计师 — 7 年互联网设计经验，擅长 B 端复杂系统的从 0 到 1 与 Design System 建设。"
 					align="start"
 				>
 					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+						<Pill><Icon icon="terminal-window" size="1.33em" /> 产品思维</Pill>
+						<Pill><Icon icon="arrow-right" size="1.33em" /> 交互思维</Pill>
+						<Pill><Icon icon="pencil-line" size="1.33em" /> 视觉设计</Pill>
+						<Pill><Icon icon="rocket-launch" size="1.33em" /> 动效设计</Pill>
 					</div>
 				</Hero>
 
 				<img
-					alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
+					alt="李想林"
 					width="480"
 					height="620"
-					src="/assets/portrait.jpg"
+					src="/avatar.jpg"
 				/>
 			</header>
 
@@ -52,8 +51,8 @@ const projects = (await getCollection('work'))
 		<main class="wrapper stack gap-20 lg:gap-48">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
+					<h3>精选作品</h3>
+					<p>近年来主导/参与的代表性项目，覆盖 B 端后台、移动端、网页与可视化大屏。</p>
 				</header>
 
 				<div class="gallery">
@@ -70,7 +69,7 @@ const projects = (await getCollection('work'))
 
 				<div class="cta">
 					<CallToAction href="/work/">
-						View All
+						查看全部
 						<Icon icon="arrow-right" size="1.2em" />
 					</CallToAction>
 				</div>
@@ -78,19 +77,16 @@ const projects = (await getCollection('work'))
 
 			<section class="section with-background bg-variant">
 				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
-					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
-					</p>
+					<h3>作品分类</h3>
+					<p>按媒介类型浏览全部作品。</p>
 				</header>
 
 				<div class="gallery">
 					<Grid variant="small">
 						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
+							Object.entries(CATEGORIES).map(([slug, label]) => (
 								<li class="mention-card">
-									<p>{brand}</p>
+									<a href={`/work/?category=${slug}`}>{label}</a>
 								</li>
 							))
 						}
@@ -135,6 +131,7 @@ const projects = (await getCollection('work'))
 			margin-top: 0.5rem;
 			display: flex;
 			gap: 0.5rem;
+			flex-wrap: wrap;
 		}
 
 		.hero img {
@@ -143,8 +140,6 @@ const projects = (await getCollection('work'))
 			object-fit: cover;
 		}
 	}
-
-	/* ====================================================== */
 
 	.section {
 		display: grid;
@@ -225,8 +220,6 @@ const projects = (await getCollection('work'))
 		}
 	}
 
-	/* ====================================================== */
-
 	.mention-card {
 		display: flex;
 		height: 7rem;
@@ -235,9 +228,28 @@ const projects = (await getCollection('work'))
 		text-align: center;
 		border: 1px solid var(--gray-800);
 		border-radius: 1.5rem;
-		color: var(--gray-300);
+		color: var(--gray-200);
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
+		font-size: var(--text-lg);
+		transition: transform 0.2s ease;
+	}
+
+	.mention-card a {
+		color: inherit;
+		text-decoration: none;
+		display: block;
+		padding: 1rem;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.mention-card:hover {
+		transform: translateY(-2px);
+		color: var(--accent-regular);
 	}
 
 	@media (min-width: 50em) {

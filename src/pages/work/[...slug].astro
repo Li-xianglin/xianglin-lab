@@ -6,6 +6,7 @@ import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CATEGORIES } from '../../content.config';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -31,13 +32,24 @@ const { Content } = await render(entry);
 		<div class="stack gap-15">
 			<header>
 				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> 返回作品列表</a>
 					<Hero title={entry.data.title} align="start">
 						<div class="details">
 							<div class="tags">
+								<Pill>{CATEGORIES[entry.data.category]}</Pill>
 								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
 							</div>
 							<p class="description">{entry.data.description}</p>
+							{(entry.data.role || entry.data.award) && (
+								<dl class="meta">
+									{entry.data.role && (
+										<><dt>角色</dt><dd>{entry.data.role}</dd></>
+									)}
+									{entry.data.award && (
+										<><dt>奖项</dt><dd>{entry.data.award}</dd></>
+									)}
+								</dl>
+							)}
 						</div>
 					</Hero>
 				</div>
@@ -48,6 +60,12 @@ const { Content } = await render(entry);
 					<div class="content">
 						<Content />
 					</div>
+					{entry.data.meiye_url && (
+						<a class="external-link" href={entry.data.meiye_url} target="_blank" rel="noopener">
+							查看完整 case study（美叶）
+							<Icon icon="arrow-right" size="1.2em" />
+						</a>
+					)}
 				</div>
 			</main>
 		</div>
@@ -132,6 +150,41 @@ const { Content } = await render(entry);
 		text-decoration-color: currentColor;
 	}
 
+	.meta {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.5rem 1rem;
+		margin: 0;
+		font-size: var(--text-sm);
+	}
+
+	.meta dt {
+		color: var(--gray-400);
+	}
+
+	.meta dd {
+		margin: 0;
+		color: var(--gray-100);
+	}
+
+	.external-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		background: var(--accent-regular);
+		color: var(--accent-text-over);
+		text-decoration: none;
+		border-radius: 999rem;
+		font-size: var(--text-md);
+		align-self: flex-start;
+		transition: opacity 0.2s ease;
+	}
+
+	.external-link:hover {
+		opacity: 0.85;
+	}
+
 	@media (min-width: 50em) {
 		.back-link {
 			display: block;
@@ -141,6 +194,7 @@ const { Content } = await render(entry);
 		.details {
 			flex-direction: row;
 			gap: 2.5rem;
+			flex-wrap: wrap;
 		}
 
 		.content :global(blockquote) {

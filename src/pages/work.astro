@@ -1,37 +1,143 @@
 ---
 import { getCollection } from 'astro:content';
+import { CATEGORIES, type CategorySlug } from '../content.config';
 import ContactCTA from '../components/ContactCTA.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const projects = (await getCollection('work')).sort(
+const all = (await getCollection('work')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
+
+const grouped = (Object.keys(CATEGORIES) as CategorySlug[]).map((slug) => ({
+	slug,
+	label: CATEGORIES[slug],
+	projects: all.filter((p) => p.data.category === slug),
+}));
 ---
 
 <BaseLayout
-	title="My Work | Jeanine White"
-	description="Learn about Jeanine White's most recent projects"
+	title="作品 | 李想林"
+	description="李想林的作品集 — 后台系统、App 设计、网页设计、可视化页面等。"
 >
 	<div class="stack gap-20">
-		<main class="wrapper stack gap-8">
+		<main class="wrapper stack gap-12">
 			<Hero
-				title="My Work"
-				tagline="See my most recent projects below to get an idea of my past experience."
+				title="作品"
+				tagline="按媒介类型组织。每个项目卡片可点入详情，或跳转到完整 case study。"
 				align="start"
 			/>
-			<Grid variant="offset">
-				{
-					projects.map((project) => (
-						<li>
-							<PortfolioPreview project={project} />
-						</li>
-					))
-				}
-			</Grid>
+
+			<nav class="cat-nav">
+				{grouped.map((g) => (
+					<a href={`#${g.slug}`} class="cat-link" data-empty={g.projects.length === 0}>
+						{g.label}
+						<span class="cat-count">{g.projects.length}</span>
+					</a>
+				))}
+			</nav>
+
+			{grouped.map((g) => (
+				<section id={g.slug} class="cat-section">
+					<header class="cat-header">
+						<h2>{g.label}</h2>
+						<p class="cat-meta">{g.projects.length} 个项目</p>
+					</header>
+					{g.projects.length > 0 ? (
+						<Grid variant="offset">
+							{g.projects.map((project) => (
+								<li>
+									<PortfolioPreview project={project} />
+								</li>
+							))}
+						</Grid>
+					) : (
+						<p class="empty">该分类暂无项目（建设中）。</p>
+					)}
+				</section>
+			))}
 		</main>
 		<ContactCTA />
 	</div>
 </BaseLayout>
+
+<style>
+	.cat-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.cat-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		border-radius: 999rem;
+		border: 1px solid var(--gray-800);
+		background: var(--gray-999_40);
+		color: var(--gray-200);
+		text-decoration: none;
+		font-size: var(--text-sm);
+		transition: all 0.2s ease;
+	}
+
+	.cat-link:hover {
+		color: var(--accent-text-over);
+		background: var(--accent-regular);
+		border-color: var(--accent-regular);
+	}
+
+	.cat-link[data-empty='true'] {
+		opacity: 0.5;
+	}
+
+	.cat-count {
+		font-size: var(--text-xs);
+		padding: 0.1rem 0.5rem;
+		background: var(--gray-800);
+		border-radius: 999rem;
+		color: var(--gray-300);
+	}
+
+	.cat-link:hover .cat-count {
+		background: var(--gray-999);
+		color: var(--accent-regular);
+	}
+
+	.cat-section {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		scroll-margin-top: 5rem;
+	}
+
+	.cat-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		border-bottom: 1px solid var(--gray-800);
+		padding-bottom: 0.75rem;
+	}
+
+	.cat-header h2 {
+		font-size: var(--text-2xl);
+		color: var(--gray-0);
+		margin: 0;
+	}
+
+	.cat-meta {
+		color: var(--gray-400);
+		font-size: var(--text-sm);
+		margin: 0;
+	}
+
+	.empty {
+		color: var(--gray-400);
+		font-style: italic;
+		padding: 2rem 0;
+	}
+</style>

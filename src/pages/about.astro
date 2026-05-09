@@ -2,56 +2,133 @@
 import ContactCTA from '../components/ContactCTA.astro';
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const workExperience = [
+	{
+		period: '2022.10 — 2025.03',
+		company: '上海择仕信息技术有限公司',
+		role: 'UI & UX 设计师',
+		highlights: [
+			'为海外 FinTech Automation (FTA) 公司设计 B 端金融系统及移动端 App，获 2024 外资最佳潜力奖',
+			'负责 Money Management System、Client View、Mobile App 等 B 端金融产品的 UI 设计；通过用户研究与需求分析，制定符合用户习惯与业务逻辑的方案，提升产品易用性与效率',
+			'使用 Figma 制作高保真原型与交互演示，确保复杂功能的用户路径清晰；通过设计规范保持界面一致性，提高研发协作效率',
+			'与产品经理（PM）和产品负责人（PO）紧密合作，定义产品功能与设计优先级，基于市场调研与用户反馈优化已有产品功能',
+		],
+	},
+	{
+		period: '2022.03 — 2022.08',
+		company: '成都智元汇信息技术股份有限公司',
+		role: 'UI 设计师',
+		highlights: [
+			'负责成都公交移动端 App 设计，参与产品需求评审、设计执行、走查等工作',
+			'成都地铁 App 的运营设计，包括春、夏、秋、冬等四季皮肤设计',
+			'成都地铁智慧安检后台系统、广告系统的迭代优化；参与体验交互等设计；刷脸乘车过闸、开包台等硬件显示 UI 设计',
+		],
+	},
+	{
+		period: '2021.01 — 2022.03',
+		company: '新晨科技股份有限公司',
+		role: 'UI 设计师',
+		highlights: [
+			'服务于中信银行：负责中信银行内部系统开发设计，例如一线专属作业平台、预决算柜面系统等',
+			'中信银行相关官网（如 e 福利）和 H5 页面设计制作',
+			'中信银行的部分平面设计工作，如 e 对账三折页、e 福利 logo 设计等',
+		],
+	},
+	{
+		period: '2019.07 — 2020.12',
+		company: '成都拓尔思信息技术有限公司',
+		role: 'UI 设计师',
+		highlights: [
+			'重庆市人民政府集约化项目：负责发改委、金融管理局、两江新区等网站的页面与 wap 设计',
+			'陕西省人民政府集约化项目：陕西卫健委、民宗委、审计厅等网站设计；陕西人民政府领导驾驶舱（大屏）、智能问答与子站主站检索页面重新设计',
+			'西宁市人民政府集约化项目：政府网站设计改版，与客户长时间沟通磨合，完成数据大屏、wap、检索等设计工作并配合前端达到上线要求',
+		],
+	},
+];
+
+const skills = [
+	{ group: '设计工具', items: ['Figma', 'Sketch', 'Photoshop', 'Illustrator', 'After Effects', 'C4D', 'Axure'] },
+	{ group: '能力标签', items: ['产品思维', '交互思维', '视觉设计', '动效设计', 'Design System', 'B 端复杂系统'] },
+	{ group: '行业经验', items: ['海外 FinTech', '银行 / 金融', '智慧政务', '智能交通', '可视化大屏'] },
+];
 ---
 
-<BaseLayout title="About | Jeanine White" description="About Jeanine White Lorem Ipsum">
+<BaseLayout title="关于 | 李想林" description="李想林 — UX/UI 设计师，7 年互联网设计经验。">
 	<div class="stack gap-20">
 		<main class="wrapper about">
 			<Hero
-				title="About"
-				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-			>
-				<img
-					width="1553"
-					height="873"
-					src="/assets/at-work.jpg"
-					alt="Jeanine White at work with a colleague"
-				/>
-			</Hero>
+				title="关于我"
+				tagline="UX/UI 设计师，7 年互联网设计经验。从用户角度出发，注重细节打磨，致力于打造高适用性、高易用性、强友好性的产品体验。"
+			/>
 
 			<section>
-				<h2 class="section-title">Background</h2>
+				<h2 class="section-title">个人简介</h2>
 				<div class="content">
 					<p>
-						Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a> makes people happy. Sed
-						do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum
-						id venenatis a condimentum vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla
-						pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.
+						大学毕业以来一直从事 UI/UX 设计相关工作，在互联网行业拥有多年设计经验，能够根据不同业务需求提供高效、专业的解决方案。
 					</p>
 					<p>
-						Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis
-						natoque penatibus. Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl
-						condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel
-						quam elementum pulvinar etiam non.
+						擅长从用户角度出发，注重细节打磨，致力于打造高适用性、高易用性、强友好性的产品体验。熟练掌握多种设计工具，具备扎实的设计功底与规范意识，能够胜任从 0 到 1 的完整设计流程。
 					</p>
 					<p>
-						Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet
-						eget sit amet. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra.
-						Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl
-						pretium fusce.
+						具备良好的沟通协作能力和团队精神，能快速适应不同项目环境，推动跨部门高效协作。未来将持续深耕用户体验方向，做更有温度和价值的设计。
 					</p>
 				</div>
 			</section>
+
 			<section>
-				<h2 class="section-title">Education</h2>
+				<h2 class="section-title">基本信息</h2>
 				<div class="content">
-					<p>Corporis voluptates tenetur laudantium.</p>
+					<ul class="basics">
+						<li><span>籍贯</span>四川省成都市</li>
+						<li><span>毕业院校</span>安徽大学（211）· 统招本科 · 2013–2017</li>
+						<li><span>工作经验</span>7 年</li>
+						<li><span>当前坐标</span>上海</li>
+						<li><span>兴趣爱好</span>徒步 · 摄影</li>
+					</ul>
 				</div>
 			</section>
+
 			<section>
-				<h2 class="section-title">Skills</h2>
+				<h2 class="section-title">工作经历</h2>
+				<div class="content stack gap-8">
+					{workExperience.map((job) => (
+						<article class="job">
+							<header class="job-head">
+								<h3 class="job-title">{job.company} <span class="job-role">· {job.role}</span></h3>
+								<p class="job-period">{job.period}</p>
+							</header>
+							<ul class="job-points">
+								{job.highlights.map((h) => <li>{h}</li>)}
+							</ul>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section>
+				<h2 class="section-title">技能</h2>
+				<div class="content stack gap-4">
+					{skills.map((g) => (
+						<div class="skill-group">
+							<h4>{g.group}</h4>
+							<ul class="tags">
+								{g.items.map((i) => <li>{i}</li>)}
+							</ul>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section>
+				<h2 class="section-title">联系方式</h2>
 				<div class="content">
-					<p>officia unde omnis</p>
+					<p>
+						邮箱：<a href="mailto:2698956635@qq.com">2698956635@qq.com</a><br />
+						GitHub：<a href="https://github.com/Li-xianglin">Li-xianglin</a><br />
+						完整作品集：<a href="https://works.meiye.art/preview/ZDB25216R5810O9A">works.meiye.art</a>
+					</p>
 				</div>
 			</section>
 		</main>
@@ -65,12 +142,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;
-	}
-
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
 	}
 
 	section {
@@ -94,11 +165,90 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		text-decoration: 1px solid underline transparent;
 		text-underline-offset: 0.25em;
 		transition: text-decoration-color var(--theme-transition);
+		color: var(--accent-regular);
 	}
 
 	.content :global(a:hover),
 	.content :global(a:focus) {
 		text-decoration-color: currentColor;
+	}
+
+	.basics {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.basics li {
+		display: grid;
+		grid-template-columns: 6em 1fr;
+		gap: 1rem;
+	}
+
+	.basics li span {
+		color: var(--gray-400);
+	}
+
+	.job {
+		border-left: 2px solid var(--gray-800);
+		padding-left: 1rem;
+	}
+
+	.job-head {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.job-title {
+		font-size: var(--text-md);
+		color: var(--gray-0);
+		margin: 0;
+	}
+
+	.job-role {
+		color: var(--gray-300);
+		font-weight: normal;
+	}
+
+	.job-period {
+		color: var(--gray-400);
+		font-size: var(--text-sm);
+		margin: 0;
+	}
+
+	.job-points {
+		list-style: disc;
+		padding-left: 1.25rem;
+		color: var(--gray-300);
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.skill-group h4 {
+		color: var(--gray-300);
+		font-size: var(--text-sm);
+		margin-bottom: 0.5rem;
+	}
+
+	.tags {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		padding: 0;
+	}
+
+	.tags li {
+		padding: 0.25rem 0.75rem;
+		background: var(--gray-999_40);
+		border: 1px solid var(--gray-800);
+		border-radius: 999rem;
+		font-size: var(--text-sm);
+		color: var(--gray-200);
 	}
 
 	@media (min-width: 50em) {
@@ -114,6 +264,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		section {
 			display: contents;
 			font-size: var(--text-lg);
+		}
+
+		.job-head {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: baseline;
 		}
 	}
 </style>
