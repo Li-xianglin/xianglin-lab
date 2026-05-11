@@ -54,12 +54,12 @@ const skills = [
 ];
 ---
 
-<BaseLayout title="关于 | 李想林" description="李想林 — UX/UI 设计师，7 年互联网设计经验。">
+<BaseLayout title="关于 | 李想林" description="李想林 — UX/UI 设计师，8 年互联网设计经验。">
 	<div class="stack gap-20">
 		<main class="wrapper about">
 			<Hero
 				title="关于我"
-				tagline="UX/UI 设计师，7 年互联网设计经验。从用户角度出发，注重细节打磨，致力于打造高适用性、高易用性、强友好性的产品体验。"
+				tagline="UX/UI 设计师，8 年互联网设计经验。从用户角度出发，注重细节打磨，致力于打造高适用性、高易用性、强友好性的产品体验。"
 			/>
 
 			<section>
@@ -83,7 +83,7 @@ const skills = [
 					<ul class="basics">
 						<li><span>籍贯</span>四川省成都市</li>
 						<li><span>毕业院校</span>安徽大学（211）· 统招本科 · 2013–2017</li>
-						<li><span>工作经验</span>7 年</li>
+						<li><span>工作经验</span>8 年</li>
 						<li><span>当前坐标</span>成都</li>
 						<li><span>兴趣爱好</span>徒步 · 摄影</li>
 					</ul>
@@ -126,8 +126,7 @@ const skills = [
 				<div class="content">
 					<p>
 						邮箱：<a href="mailto:2698956635@qq.com">2698956635@qq.com</a><br />
-						GitHub：<a href="https://github.com/Li-xianglin">Li-xianglin</a><br />
-						完整作品集：<a href="https://works.meiye.art/preview/ZDB25216R5810O9A">works.meiye.art</a>
+						电话：<a href="tel:+8613540240539">+86 135 4024 0539</a>
 					</p>
 				</div>
 			</section>
@@ -142,6 +141,13 @@ const skills = [
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;
+	}
+
+	.about :global(.tagline) {
+		font-size: var(--text-md);
+		line-height: 1.7;
+		max-width: 56ch;
+		color: var(--gray-300);
 	}
 
 	section {

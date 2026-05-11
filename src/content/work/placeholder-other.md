@@ -10,7 +10,6 @@ tags:
   - 运营物料
 img: /assets/stock-1.jpg
 img_alt: 综合设计作品
-meiye_url: https://works.meiye.art/preview/ZDB25216R5810O9A
 ---
 
 待补充：其他平面、动效、运营物料等综合设计作品。

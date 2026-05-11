@@ -12,7 +12,6 @@ tags:
   - 海外项目
 img: /assets/stock-1.jpg
 img_alt: Trust Accounting Dashboard 主界面
-meiye_url: https://works.meiye.art/preview/ZDB25216R5810O9A
 featured: true
 ---
 
@@ -41,6 +40,3 @@ Trust Accounting 是一套专为金融机构（如信托公司、资产托管银
 - **Compliance** — OFAC / FinCEN / CTR 合规审查
 - **User Management** — 角色 + 权限 + 审计
 
-## 详细案例
-
-完整 case study（含信息架构推演、竞品分析、Design System 建设、各模块界面演示）见美叶完整版作品集。

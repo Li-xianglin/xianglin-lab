@@ -10,7 +10,6 @@ tags:
   - 政务
 img: /assets/stock-4.jpg
 img_alt: 政府数据可视化大屏
-meiye_url: https://works.meiye.art/preview/ZDB25216R5810O9A
 ---
 
 待补充：政务可视化大屏项目详情。

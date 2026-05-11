@@ -10,7 +10,6 @@ tags:
   - 官网
 img: /assets/stock-3.jpg
 img_alt: 中信银行 e 福利
-meiye_url: https://works.meiye.art/preview/ZDB25216R5810O9A
 ---
 
 待补充：中信银行相关网页、H5 项目详情。

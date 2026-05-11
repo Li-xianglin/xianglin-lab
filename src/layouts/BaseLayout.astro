@@ -2,7 +2,6 @@
 // Learn about using Astro layouts:
 // https://docs.astro.build/en/basics/layouts/
 
-import Footer from '../components/Footer.astro';
 // Component Imports
 import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
@@ -26,7 +25,6 @@ const { title, description } = Astro.props;
 		<div class="stack backgrounds">
 			<Nav />
 			<slot />
-			<Footer />
 		</div>
 
 		<script>

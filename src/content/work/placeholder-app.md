@@ -10,7 +10,6 @@ tags:
   - 交通出行
 img: /assets/stock-2.jpg
 img_alt: 成都地铁 App 季节皮肤
-meiye_url: https://works.meiye.art/preview/ZDB25216R5810O9A
 ---
 
 待补充：成都地铁 App 项目详情。
