@@ -55,6 +55,7 @@ const focusCards = [
 					<circle cx="1200" cy="180" r="120" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none" />
 					<circle cx="1200" cy="180" r="200" stroke="rgba(255,255,255,0.025)" stroke-width="1" fill="none" />
 				</svg>
+
 				<div class="ghost-text" aria-hidden="true">DESIGN</div>
 
 				<svg class="sparkle sparkle-1" viewBox="0 0 24 24" aria-hidden="true">
@@ -73,9 +74,9 @@ const focusCards = [
 			<div class="hero-grid">
 				<div class="hero-text">
 					<h1 class="display">
-						<span class="display-line">BUILDING</span>
-						<span class="display-line display-italic">complex</span>
-						<span class="display-line">EXPERIENCES.</span>
+						<span class="display-line">MAKING</span>
+						<span class="display-line display-italic">COMPLEX</span>
+						<span class="display-line">EFFORTLESS.</span>
 					</h1>
 
 					<div class="hero-meta">
@@ -220,14 +221,14 @@ const focusCards = [
 				</div>
 
 				<div class="contact-info">
-					<a class="contact-row" href="tel:+8613540240539">
+					<div class="contact-row contact-row--static">
 						<span class="contact-label">电话</span>
 						<span class="contact-value">+86 135 4024 0539</span>
-					</a>
-					<a class="contact-row" href="mailto:2698956635@qq.com">
+					</div>
+					<div class="contact-row contact-row--static">
 						<span class="contact-label">邮箱</span>
 						<span class="contact-value">2698956635@qq.com</span>
-					</a>
+					</div>
 					<div class="contact-row contact-row--static">
 						<span class="contact-label">坐标</span>
 						<span class="contact-value">四川 · 成都</span>
@@ -383,6 +384,7 @@ const focusCards = [
 		pointer-events: none;
 	}
 
+
 	.ghost-text {
 		position: absolute;
 		top: 50%;
@@ -463,9 +465,10 @@ const focusCards = [
 
 	.display-italic {
 		font-style: italic;
-		font-weight: 400;
-		text-transform: lowercase;
-		color: var(--gray-300);
+		font-weight: 500;
+		color: var(--gray-999);
+		-webkit-text-stroke: 3px var(--gray-100);
+		paint-order: stroke fill;
 		letter-spacing: -0.02em;
 	}
 
@@ -1216,7 +1219,7 @@ const focusCards = [
 		padding: 6rem 0 4rem;
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 5rem;
 	}
 
 	.cta-head {
@@ -1224,21 +1227,24 @@ const focusCards = [
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 1rem;
+		gap: 0.85rem;
 	}
 
 	.cta-title {
 		font-family: var(--font-brand);
-		font-size: clamp(2rem, 6vw, 3.5rem);
-		line-height: 1.2;
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		line-height: 1.25;
+		letter-spacing: -0.02em;
 		color: var(--gray-0);
 		margin: 0;
 	}
 
 	.cta-desc {
-		color: var(--gray-300);
+		color: var(--gray-500);
 		max-width: 50ch;
 		margin: 0;
+		font-size: var(--text-xs);
+		line-height: 1.6;
 	}
 
 	.cta-desc {
@@ -1250,29 +1256,30 @@ const focusCards = [
 	.contact-card {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1.25rem;
+		gap: 2rem;
 		padding: 0;
 	}
 
 	.contact-info {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem 2.5rem;
+		flex: 1;
 	}
 
 	.contact-row {
-		display: grid;
-		grid-template-columns: 3em 1fr;
-		align-items: baseline;
-		gap: 1rem;
-		padding: 0.5rem 0;
-		border-bottom: 1px solid var(--gray-800);
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-bottom: 0.6rem;
+		border-bottom: 1px solid var(--gray-700);
 		text-decoration: none;
 		color: inherit;
-		transition: color 0.2s ease;
+		transition: border-color 0.2s ease;
 	}
 
-	.contact-row:last-child {
-		border-bottom: 0;
+	.contact-row:not(.contact-row--static):hover {
+		border-bottom-color: var(--gray-300);
 	}
 
 	.contact-row:not(.contact-row--static):hover .contact-value {
@@ -1280,16 +1287,24 @@ const focusCards = [
 	}
 
 	.contact-label {
+		font-family: var(--font-brand);
 		font-size: var(--text-xs);
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
+		font-weight: 500;
 		color: var(--gray-400);
+		letter-spacing: 0.02em;
+	}
+
+	.contact-label::after {
+		content: ':';
+		margin-left: 0.05em;
 	}
 
 	.contact-value {
 		font-family: var(--font-brand);
-		font-size: var(--text-md);
-		color: var(--gray-100);
+		font-size: var(--text-lg);
+		font-weight: 500;
+		color: var(--gray-0);
+		letter-spacing: 0.01em;
 		transition: color 0.2s ease;
 	}
 
@@ -1297,47 +1312,50 @@ const focusCards = [
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.875rem;
-		border: 1px solid var(--gray-800);
-		border-radius: 0.875rem;
+		gap: 0.6rem;
+		padding: 0.75rem;
+		border-radius: 0.75rem;
 		background: #ffffff;
 	}
 
 	.wechat-qr img {
 		display: block;
 		width: 100%;
-		max-width: 130px;
+		max-width: 120px;
 		height: auto;
 		aspect-ratio: 1;
 		object-fit: contain;
-		background: #ffffff;
 	}
 
 	.wechat-caption {
 		margin: 0;
-		font-size: var(--text-xs);
-		color: #0a0a0a;
-		letter-spacing: 0.05em;
+		font-size: 11px;
+		color: #1a1a1a;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
 	}
 
 	@media (min-width: 50em) {
 		.contact-card {
-			grid-template-columns: auto auto;
-			justify-content: center;
+			grid-template-columns: auto 1fr;
 			align-items: center;
-			gap: 2.5rem;
+			gap: 3rem;
 			padding: 0;
-			max-width: max-content;
+			max-width: 56rem;
 			margin: 0 auto;
 		}
 
 		.contact-info {
-			min-width: 22rem;
+			grid-template-columns: 1fr 1fr;
+			gap: 1.75rem 3rem;
+		}
+
+		.contact-row:nth-child(3) {
+			grid-column: 1 / -1;
 		}
 
 		.wechat-qr img {
-			max-width: 140px;
+			max-width: 130px;
 		}
 	}
 

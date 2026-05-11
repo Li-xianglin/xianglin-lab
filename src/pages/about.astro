@@ -125,8 +125,8 @@ const skills = [
 				<h2 class="section-title">联系方式</h2>
 				<div class="content">
 					<p>
-						邮箱：<a href="mailto:2698956635@qq.com">2698956635@qq.com</a><br />
-						电话：<a href="tel:+8613540240539">+86 135 4024 0539</a>
+						邮箱：2698956635@qq.com<br />
+						电话：+86 135 4024 0539
 					</p>
 				</div>
 			</section>
@@ -140,7 +140,7 @@ const skills = [
 	.about {
 		display: flex;
 		flex-direction: column;
-		gap: 3.5rem;
+		gap: 5rem;
 	}
 
 	.about :global(.tagline) {
@@ -153,7 +153,7 @@ const skills = [
 	section {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 1.5rem;
 		color: var(--gray-200);
 	}
 
@@ -161,10 +161,23 @@ const skills = [
 		grid-column-start: 1;
 		font-size: var(--text-xl);
 		color: var(--gray-0);
+		letter-spacing: -0.01em;
+		margin: 0;
 	}
 
 	.content {
 		grid-column: 2 / 4;
+		font-size: var(--text-md);
+		line-height: 1.85;
+		color: var(--gray-200);
+	}
+
+	.content :global(p) {
+		margin: 0 0 1rem;
+	}
+
+	.content :global(p:last-child) {
+		margin-bottom: 0;
 	}
 
 	.content :global(a) {
@@ -182,18 +195,33 @@ const skills = [
 	.basics {
 		list-style: none;
 		padding: 0;
+		margin: 0;
 		display: grid;
-		gap: 0.5rem;
+		gap: 0;
 	}
 
 	.basics li {
 		display: grid;
-		grid-template-columns: 6em 1fr;
-		gap: 1rem;
+		grid-template-columns: 7em 1fr;
+		gap: 1.5rem;
+		padding: 0.875rem 0;
+		border-bottom: 1px solid var(--gray-800);
+		color: var(--gray-100);
+		align-items: baseline;
+	}
+
+	.basics li:first-child {
+		padding-top: 0;
+	}
+
+	.basics li:last-child {
+		border-bottom: 0;
 	}
 
 	.basics li span {
-		color: var(--gray-400);
+		color: var(--gray-500);
+		font-size: var(--text-sm);
+		letter-spacing: 0.04em;
 	}
 
 	.job {
@@ -261,6 +289,8 @@ const skills = [
 		.about {
 			display: grid;
 			grid-template-columns: 1fr 60% 1fr;
+			row-gap: 5rem;
+			column-gap: 3rem;
 		}
 
 		.about > :global(:first-child) {
