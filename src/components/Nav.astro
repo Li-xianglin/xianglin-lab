@@ -142,8 +142,7 @@ const isCurrentPage = (href: string) => {
 		transition:
 			background-color 0.35s ease,
 			backdrop-filter 0.35s ease,
-			border-color 0.35s ease,
-			padding 0.35s ease;
+			border-color 0.35s ease;
 		border-bottom: 1px solid transparent;
 	}
 
@@ -159,11 +158,6 @@ const isCurrentPage = (href: string) => {
 		justify-content: space-between;
 		gap: 0.5rem;
 		padding: 1.5rem;
-		transition: padding 0.35s ease;
-	}
-
-	:global(html.is-scrolled) .menu-header {
-		padding: 1rem 1.5rem;
 	}
 
 	.site-title {
@@ -286,12 +280,8 @@ const isCurrentPage = (href: string) => {
 			display: grid;
 			grid-template-columns: 1fr auto 1fr;
 			align-items: center;
-			padding: 2rem 5rem;
+			padding: 1.25rem 5rem;
 			gap: 1rem;
-		}
-
-		:global(html.is-scrolled) nav {
-			padding: 1rem 5rem;
 		}
 
 		.menu-header {
