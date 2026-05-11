@@ -7,6 +7,7 @@ export const CATEGORIES = {
 	'app-sheji': 'App 设计',
 	'wangye-sheji': '网页设计',
 	'keshihua-yemian': '可视化页面',
+	'sheying': '摄影',
 	'qita': '其他',
 } as const;
 
@@ -19,7 +20,7 @@ export const collections = {
 			title: z.string(),
 			description: z.string(),
 			publishDate: z.coerce.date(),
-			category: z.enum(['houtai-xitong', 'app-sheji', 'wangye-sheji', 'keshihua-yemian', 'qita']),
+			category: z.enum(['houtai-xitong', 'app-sheji', 'wangye-sheji', 'keshihua-yemian', 'sheying', 'qita']),
 			role: z.string().optional(),
 			award: z.string().optional(),
 			tags: z.array(z.string()),

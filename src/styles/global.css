@@ -1,48 +1,55 @@
+/* Local fonts — Montserrat (variable, full weight range) */
+@font-face {
+	font-family: 'Montserrat';
+	src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype-variations');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	src: url('/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype-variations');
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
 /* Global variables */
 :root {
-	/* Colors */
-	--gray-0: #090b11;
-	--gray-50: #141925;
-	--gray-100: #283044;
-	--gray-200: #3d4663;
-	--gray-300: #505d84;
-	--gray-400: #6474a2;
-	--gray-500: #8490b5;
-	--gray-600: #a3acc8;
-	--gray-700: #c3cadb;
-	--gray-800: #e3e6ee;
-	--gray-900: #f3f4f7;
+	/* Light mode: white bg, black text, neutral grays */
+	--gray-0: #0a0a0a;
+	--gray-50: #141414;
+	--gray-100: #1f1f1f;
+	--gray-200: #2a2a2a;
+	--gray-300: #525252;
+	--gray-400: #707070;
+	--gray-500: #999999;
+	--gray-600: #b0b0b0;
+	--gray-700: #c4c4c4;
+	--gray-800: #e5e5e5;
+	--gray-900: #f5f5f5;
 	--gray-999-basis: 0, 0%, 100%;
-	--gray-999_40: hsla(var(--gray-999-basis), 0.4);
+	--gray-999_40: hsla(var(--gray-999-basis), 0.5);
 	--gray-999: #ffffff;
 
-	--accent-light: #c561f6;
-	--accent-regular: #7611a6;
-	--accent-dark: #1c0056;
-	--accent-overlay: hsla(280, 89%, 67%, 0.33);
-	--accent-subtle-overlay: var(--accent-overlay);
-	--accent-text-over: var(--gray-999);
+	--accent-light: #525252;
+	--accent-regular: #0a0a0a;
+	--accent-dark: #2a2a2a;
+	--accent-overlay: hsla(0, 0%, 0%, 0.08);
+	--accent-subtle-overlay: hsla(0, 0%, 0%, 0.05);
+	--accent-text-over: #ffffff;
 
-	--link-color: var(--accent-regular);
+	--link-color: #0a0a0a;
 
 	/* Gradients */
-	--gradient-stop-1: var(--accent-light);
-	--gradient-stop-2: var(--accent-regular);
-	--gradient-stop-3: var(--accent-dark);
-	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-999) 150%);
-	--gradient-accent: linear-gradient(
-		150deg,
-		var(--gradient-stop-1),
-		var(--gradient-stop-2),
-		var(--gradient-stop-3)
-	);
-	--gradient-accent-orange: linear-gradient(
-		150deg,
-		#ca7879,
-		var(--accent-regular),
-		var(--accent-dark)
-	);
-	--gradient-stroke: linear-gradient(180deg, var(--gray-900), var(--gray-700));
+	--gradient-stop-1: #0a0a0a;
+	--gradient-stop-2: #2a2a2a;
+	--gradient-stop-3: #525252;
+	--gradient-subtle: linear-gradient(150deg, #f5f5f5 0%, #ffffff 100%);
+	--gradient-accent: linear-gradient(135deg, #0a0a0a 0%, #525252 100%);
+	--gradient-accent-orange: linear-gradient(135deg, #0a0a0a 0%, #525252 100%);
+	--gradient-stroke: linear-gradient(180deg, #e5e5e5, #c4c4c4);
 
 	/* Shadows */
 	--shadow-sm:
@@ -70,8 +77,10 @@
 	--font-system:
 		system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
 		"Open Sans", "Helvetica Neue", sans-serif;
-	--font-body: "Public Sans", var(--font-system);
-	--font-brand: Rubik, var(--font-system);
+	--font-cn:
+		"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+	--font-body: Montserrat, var(--font-cn), var(--font-system);
+	--font-brand: Montserrat, var(--font-cn), var(--font-system);
 
 	/* Transitions */
 	--theme-transition: 0.2s ease-in-out;
@@ -79,37 +88,36 @@
 
 :root.theme-dark {
 	--gray-0: #ffffff;
-	--gray-50: #f3f4f7;
-	--gray-100: #e3e6ee;
-	--gray-200: #c3cadb;
-	--gray-300: #a3acc8;
-	--gray-400: #8490b5;
-	--gray-500: #6474a2;
-	--gray-600: #505d84;
-	--gray-700: #3d4663;
-	--gray-800: #283044;
-	--gray-900: #141925;
-	--gray-999-basis: 225, 31%, 5%;
-	--gray-999: #090b11;
+	--gray-50: #f5f5f5;
+	--gray-100: #e5e5e5;
+	--gray-200: #c4c4c4;
+	--gray-300: #999999;
+	--gray-400: #707070;
+	--gray-500: #525252;
+	--gray-600: #3a3a3a;
+	--gray-700: #2a2a2a;
+	--gray-800: #1f1f1f;
+	--gray-900: #141414;
+	--gray-999-basis: 0, 0%, 4%;
+	--gray-999: #0a0a0a;
 
-	--accent-light: #1c0056;
-	--accent-regular: #7611a6;
-	--accent-dark: #c561f6;
-	--accent-overlay: hsla(280, 89%, 67%, 0.33);
-	--accent-subtle-overlay: hsla(281, 81%, 36%, 0.33);
-	--accent-text-over: var(--gray-0);
+	--accent-light: #ffffff;
+	--accent-regular: #ffffff;
+	--accent-dark: #d4d4d4;
+	--accent-overlay: hsla(0, 0%, 100%, 0.08);
+	--accent-subtle-overlay: hsla(0, 0%, 100%, 0.05);
+	--accent-text-over: #0a0a0a;
 
-	--link-color: var(--accent-dark);
+	--link-color: #ffffff;
 
-	--gradient-stop-1: #4c11c6;
+	--gradient-stop-1: #ffffff;
 	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-999) 81%);
 	--gradient-accent-orange: linear-gradient(
-		150deg,
-		#ca7879,
-		var(--accent-regular),
-		var(--accent-light)
+		135deg,
+		#ffffff 0%,
+		#b0b0b0 100%
 	);
-	--gradient-stroke: linear-gradient(180deg, var(--gray-600), var(--gray-800));
+	--gradient-stroke: linear-gradient(180deg, #2a2a2a, #1f1f1f);
 
 	--shadow-sm:
 		0px 6px 3px rgba(255, 255, 255, 0.01), 0px 4px 2px rgba(255, 255, 255, 0.01),
@@ -125,7 +133,10 @@
 html,
 body {
 	min-height: 100%;
-	overflow-x: hidden;
+}
+
+html {
+	overflow-x: clip;
 }
 
 body {

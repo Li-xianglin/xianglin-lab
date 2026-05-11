@@ -10,11 +10,8 @@ const textLinks: { label: string; href: string }[] = [
 	{ label: '关于', href: '/about/' },
 ];
 
-/** 社交链接 */
-const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-	{ label: 'GitHub', href: 'https://github.com/Li-xianglin', icon: 'github-logo' },
-	{ label: '邮箱', href: 'mailto:2698956635@qq.com', icon: 'paper-plane-tilt' },
-];
+/** 社交链接（暂不显示） */
+const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [];
 
 /** Test if a link is pointing to the current page. */
 const isCurrentPage = (href: string) => {
@@ -28,8 +25,7 @@ const isCurrentPage = (href: string) => {
 <nav>
 	<div class="menu-header">
 		<a href="/" class="site-title">
-			<Icon icon="terminal-window" color="var(--accent-regular)" size="1.6em" gradient />
-			李想林
+			xianglinlab<span class="site-title-dot">.</span>
 		</a>
 		<menu-button>
 			<template>
@@ -138,10 +134,24 @@ const isCurrentPage = (href: string) => {
 <style>
 	nav {
 		z-index: 9999;
-		position: relative;
+		position: sticky;
+		top: 0;
 		font-family: var(--font-brand);
 		font-weight: 500;
 		margin-bottom: 3.5rem;
+		transition:
+			background-color 0.35s ease,
+			backdrop-filter 0.35s ease,
+			border-color 0.35s ease,
+			padding 0.35s ease;
+		border-bottom: 1px solid transparent;
+	}
+
+	:global(html.is-scrolled) nav {
+		background-color: hsla(var(--gray-999-basis), 0.55);
+		backdrop-filter: saturate(180%) blur(40px);
+		-webkit-backdrop-filter: saturate(180%) blur(40px);
+		border-bottom-color: var(--gray-800);
 	}
 
 	.menu-header {
@@ -149,15 +159,26 @@ const isCurrentPage = (href: string) => {
 		justify-content: space-between;
 		gap: 0.5rem;
 		padding: 1.5rem;
+		transition: padding 0.35s ease;
+	}
+
+	:global(html.is-scrolled) .menu-header {
+		padding: 1rem 1.5rem;
 	}
 
 	.site-title {
 		display: flex;
-		gap: 0.5rem;
-		align-items: center;
+		gap: 0.4rem;
+		align-items: baseline;
 		line-height: 1.1;
 		color: var(--gray-0);
 		text-decoration: none;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+	}
+
+	.site-title-dot {
+		color: var(--gray-400);
 	}
 
 	.menu-button {
@@ -265,8 +286,12 @@ const isCurrentPage = (href: string) => {
 			display: grid;
 			grid-template-columns: 1fr auto 1fr;
 			align-items: center;
-			padding: 2.5rem 5rem;
+			padding: 2rem 5rem;
 			gap: 1rem;
+		}
+
+		:global(html.is-scrolled) nav {
+			padding: 1rem 5rem;
 		}
 
 		.menu-header {
@@ -286,19 +311,14 @@ const isCurrentPage = (href: string) => {
 			flex-direction: row;
 			font-size: var(--text-sm);
 			border-radius: 999rem;
-			border: 0;
-			padding: 0.5rem 0.5625rem;
-			background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
-			box-shadow: var(--shadow-md);
+			border: 1px solid var(--gray-800);
+			padding: 0.4rem 0.5rem;
+			background: var(--gray-900);
+			box-shadow: none;
 		}
 
 		.nav-items::before {
-			position: absolute;
-			inset: -1px;
-			content: '';
-			background: var(--gradient-stroke);
-			border-radius: 999rem;
-			z-index: -1;
+			display: none;
 		}
 
 		.link {

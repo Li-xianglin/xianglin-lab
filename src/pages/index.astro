@@ -18,7 +18,10 @@ const categoryCounts = (Object.keys(CATEGORIES) as CategorySlug[]).map((slug) =>
 	count: all.filter((p) => p.data.category === slug).length,
 }));
 
-const partners = ['上海择仕', '中信银行', '成都地铁', '智元汇', '拓尔思', '安徽大学'];
+const skillTags = [
+	'B 端设计', 'Design System', '海外 FinTech', '交互设计',
+	'产品思维', '视觉设计', '动效设计', '0→1', '组件库',
+];
 
 const focusCards = [
 	{
@@ -43,32 +46,68 @@ const focusCards = [
 	<div class="home stack">
 		{/* HERO */}
 		<section class="hero wrapper">
-			<p class="eyebrow">UX / UI · DESIGNER · 上海</p>
+			<div class="hero-bg">
+				<svg class="deco-lines" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M-50 250 Q 600 180 1500 320" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none" />
+					<path d="M-50 600 Q 700 700 1500 480" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none" />
+					<line x1="1100" y1="-50" x2="1500" y2="850" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+					<circle cx="1200" cy="180" r="120" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none" />
+					<circle cx="1200" cy="180" r="200" stroke="rgba(255,255,255,0.025)" stroke-width="1" fill="none" />
+				</svg>
+				<div class="ghost-text" aria-hidden="true">DESIGN</div>
+
+				<svg class="sparkle sparkle-1" viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" fill="rgba(255,255,255,0.5)"/>
+				</svg>
+				<svg class="sparkle sparkle-2" viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" fill="rgba(255,255,255,0.4)"/>
+				</svg>
+				<svg class="sparkle sparkle-3" viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" fill="rgba(255,255,255,0.3)"/>
+				</svg>
+			</div>
+
+			<p class="eyebrow">UX / UI · DESIGNER · 成都</p>
 
 			<div class="hero-grid">
-				<div class="hero-text stack gap-6">
+				<div class="hero-text">
 					<h1 class="display">
-						BUILDING<br />
-						<span class="display-italic">complex</span><br />
-						EXPERIENCES.
+						<span class="display-line">BUILDING</span>
+						<span class="display-line display-italic">complex</span>
+						<span class="display-line">EXPERIENCES.</span>
 					</h1>
-					<p class="hero-name">李想林 / Xianglin Li</p>
-					<p class="hero-desc">
-						UX/UI 设计师 — 7 年互联网设计经验，擅长 B 端复杂系统的从 0 到 1 与 Design System 建设。
-					</p>
 
-					<div class="hero-cta">
-						<CallToAction href="/work/">
-							查看作品
-							<Icon icon="arrow-right" size="1.2em" />
-						</CallToAction>
-						<a class="ghost-cta" href="/about/">关于我 →</a>
+					<div class="hero-meta">
+						<p class="hero-name">李想林 / Xianglin Li</p>
+						<p class="hero-desc">
+							UX/UI 设计师 · 7 年互联网设计经验<br />
+							专注 B 端复杂系统的<span class="keep">从 0 到 1</span>与 <span class="keep">Design System</span> 建设
+						</p>
+
+						<div class="hero-cta">
+							<CallToAction href="/work/">
+								查看作品
+								<Icon icon="arrow-right" size="1.2em" />
+							</CallToAction>
+						</div>
 					</div>
 				</div>
 
 				<div class="hero-art">
-					<div class="portrait-wrap">
-						<img class="portrait" src="/assets/avatar.jpg" alt="李想林" />
+					<div class="scroll-indicator" aria-hidden="true">
+						<span class="scroll-text">SCROLL DOWN</span>
+						<span class="scroll-line"></span>
+						<span class="scroll-circle">↓</span>
+					</div>
+					<div class="portrait-stack">
+						<div class="portrait-frame-outline" aria-hidden="true"></div>
+						<div class="portrait-wrap">
+							<div class="spotlight" aria-hidden="true"></div>
+							<img class="portrait" src="/assets/avatar.jpg" alt="李想林" />
+							<svg class="portrait-slash" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+								<line x1="0" y1="100" x2="100" y2="0" stroke="currentColor" stroke-width="0.4" />
+							</svg>
+						</div>
 						<div class="stat stat-1">
 							<span class="stat-num">7<small>年</small></span>
 							<span class="stat-label">设计经验</span>
@@ -86,22 +125,25 @@ const focusCards = [
 			</div>
 		</section>
 
-		{/* PARTNERS STRIP */}
-		<section class="partners">
-			<div class="partners-track">
-				{[...partners, ...partners].map((p) => (
-					<span class="partner-item">{p}</span>
+		{/* DIAGONAL SKILL RIBBON */}
+		<section class="skill-ribbon" aria-hidden="true" data-reveal>
+			<div class="skill-ribbon-track">
+				{[...skillTags, ...skillTags, ...skillTags].map((tag) => (
+					<span class="skill-tag">
+						{tag}
+						<svg class="ribbon-star" viewBox="0 0 24 24"><path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" fill="currentColor"/></svg>
+					</span>
 				))}
 			</div>
 		</section>
 
 		{/* FOCUS / EXPERTISE */}
 		<section class="wrapper focus">
-			<header class="section-head">
+			<header class="section-head" data-reveal>
 				<p class="eyebrow">EXPERTISE</p>
 				<h2 class="section-title">为复杂业务<br />设计清晰的体验。</h2>
 			</header>
-			<div class="focus-grid">
+			<div class="focus-grid" data-reveal-stagger>
 				{focusCards.map((c) => (
 					<article class="focus-card">
 						<Icon icon={c.icon as any} color="var(--accent-regular)" size="2.2rem" gradient />
@@ -114,12 +156,12 @@ const focusCards = [
 
 		{/* FEATURED WORK */}
 		<section class="wrapper featured">
-			<header class="section-head">
+			<header class="section-head" data-reveal>
 				<p class="eyebrow">SELECTED WORK</p>
 				<h2 class="section-title">精选作品</h2>
 				<p class="section-desc">近年主导/参与的代表性项目，覆盖 B 端后台、移动端、网页与可视化大屏。</p>
 			</header>
-			<div class="featured-grid">
+			<div class="featured-grid" data-reveal-stagger>
 				{featuredProjects.map((p, i) => (
 					<a class={`feat-card ${i === 0 ? 'feat-large' : ''}`} href={`/work/${p.id}/`}>
 						<div class="feat-img-wrap">
@@ -144,11 +186,11 @@ const focusCards = [
 
 		{/* CATEGORIES */}
 		<section class="wrapper categories">
-			<header class="section-head">
+			<header class="section-head" data-reveal>
 				<p class="eyebrow">EXPLORE BY CATEGORY</p>
 				<h2 class="section-title">按媒介浏览</h2>
 			</header>
-			<div class="cat-grid">
+			<div class="cat-grid" data-reveal-stagger>
 				{categoryCounts.map((c, i) => (
 					<a class="cat-card" href={`/work/#${c.slug}`}>
 						<span class="cat-num">{String(i + 1).padStart(2, '0')}</span>
@@ -161,7 +203,7 @@ const focusCards = [
 		</section>
 
 		{/* CTA */}
-		<section class="cta-section wrapper">
+		<section class="cta-section wrapper" data-reveal>
 			<h2 class="cta-title">准备好开始合作了吗？</h2>
 			<p class="cta-desc">远程协作、自由职业、长期合伙都欢迎。邮箱通常 24 小时内回复。</p>
 			<div class="cta-actions">
@@ -178,11 +220,84 @@ const focusCards = [
 			<p>XIANGLIN&nbsp;LI</p>
 		</section>
 	</div>
+
+	<script>
+		// ===== Entry reveal via IntersectionObserver =====
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						io.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+		);
+
+		document
+			.querySelectorAll('[data-reveal], [data-reveal-stagger]')
+			.forEach((el) => io.observe(el));
+
+		// ===== Focus card mouse-glow position =====
+		document.querySelectorAll('.focus-card').forEach((card) => {
+			card.addEventListener('mousemove', (e) => {
+				const rect = card.getBoundingClientRect();
+				const cx = ((e.clientX - rect.left) / rect.width) * 100;
+				const cy = ((e.clientY - rect.top) / rect.height) * 100;
+				card.style.setProperty('--cx', cx + '%');
+				card.style.setProperty('--cy', cy + '%');
+			});
+		});
+	</script>
 </BaseLayout>
 
 <style>
 	.home {
 		--mark-color: var(--gray-200);
+	}
+
+	/* ===== ENTRY REVEAL ANIMATIONS ===== */
+	[data-reveal] {
+		opacity: 0;
+		transform: translateY(24px);
+		transition:
+			opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	[data-reveal].is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	[data-reveal-stagger] > * {
+		opacity: 0;
+		transform: translateY(28px);
+		transition:
+			opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	[data-reveal-stagger].is-visible > * {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	[data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0s; }
+	[data-reveal-stagger].is-visible > *:nth-child(2) { transition-delay: 0.08s; }
+	[data-reveal-stagger].is-visible > *:nth-child(3) { transition-delay: 0.16s; }
+	[data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 0.24s; }
+	[data-reveal-stagger].is-visible > *:nth-child(5) { transition-delay: 0.32s; }
+	[data-reveal-stagger].is-visible > *:nth-child(6) { transition-delay: 0.40s; }
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-reveal],
+		[data-reveal-stagger] > * {
+			opacity: 1 !important;
+			transform: none !important;
+			transition: none !important;
+		}
 	}
 
 	.eyebrow {
@@ -204,7 +319,7 @@ const focusCards = [
 	.section-title {
 		font-family: var(--font-brand);
 		font-size: clamp(2rem, 5vw, 3.5rem);
-		line-height: 1.05;
+		line-height: 1.25;
 		letter-spacing: -0.02em;
 		color: var(--gray-0);
 		margin: 0;
@@ -218,11 +333,71 @@ const focusCards = [
 
 	/* ===== HERO ===== */
 	.hero {
+		position: relative;
 		padding-top: 2rem;
 		padding-bottom: 4rem;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
+		isolation: isolate;
+	}
+
+	/* ===== HERO BACKGROUND DECORATIONS ===== */
+	.hero-bg {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	/* Page-wide dot pattern is defined in BaseLayout.astro (applies to every page) */
+
+	.deco-lines {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	.ghost-text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-family: var(--font-brand);
+		font-weight: 800;
+		font-size: clamp(8rem, 22vw, 20rem);
+		line-height: 0.8;
+		letter-spacing: -0.05em;
+		color: transparent;
+		-webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+		white-space: nowrap;
+		user-select: none;
+		mask-image: linear-gradient(180deg, transparent 0%, black 30%, black 70%, transparent 100%);
+		-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 30%, black 70%, transparent 100%);
+	}
+
+	/* ===== PORTRAIT SPOTLIGHT ===== */
+	.spotlight {
+		position: absolute;
+		inset: -30%;
+		background: radial-gradient(
+			ellipse at center,
+			rgba(255, 255, 255, 0.18) 0%,
+			rgba(255, 255, 255, 0.06) 30%,
+			transparent 65%
+		);
+		filter: blur(40px);
+		pointer-events: none;
+		z-index: -1;
+		animation: spotlight-pulse 6s ease-in-out infinite;
+	}
+
+	@keyframes spotlight-pulse {
+		0%, 100% { opacity: 0.6; transform: scale(1); }
+		50% { opacity: 1; transform: scale(1.05); }
 	}
 
 	.hero-grid {
@@ -232,22 +407,44 @@ const focusCards = [
 		align-items: center;
 	}
 
+	.hero-text {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.hero-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		max-width: 52ch;
+	}
+
 	.display {
 		font-family: var(--font-brand);
 		font-weight: 600;
 		font-size: clamp(2.6rem, 9vw, 7rem);
-		line-height: 0.95;
+		line-height: 1;
 		letter-spacing: -0.04em;
 		color: var(--gray-0);
 		margin: 0;
 		text-transform: uppercase;
+		display: flex;
+		flex-direction: column;
+		gap: 0.05em;
+	}
+
+	.display-line {
+		display: block;
+		line-height: 1;
 	}
 
 	.display-italic {
 		font-style: italic;
 		font-weight: 400;
-		color: var(--accent-regular);
 		text-transform: lowercase;
+		color: var(--gray-300);
+		letter-spacing: -0.02em;
 	}
 
 	.hero-name {
@@ -260,9 +457,17 @@ const focusCards = [
 
 	.hero-desc {
 		color: var(--gray-300);
-		max-width: 38ch;
+		max-width: 50ch;
 		font-size: var(--text-md);
 		margin: 0;
+		line-height: 1.7;
+		text-wrap: pretty;
+	}
+
+	.hero-desc .keep {
+		white-space: nowrap;
+		color: var(--gray-100);
+		font-weight: 500;
 	}
 
 	.hero-cta {
@@ -283,24 +488,48 @@ const focusCards = [
 	}
 
 	.ghost-cta:hover {
-		color: var(--accent-regular);
-		border-bottom-color: var(--accent-regular);
+		color: var(--gray-0);
+		border-bottom-color: var(--gray-0);
 	}
 
 	/* Hero portrait + floating stats */
 	.hero-art {
 		justify-self: center;
-		max-width: 480px;
+		max-width: 620px;
 		width: 100%;
+	}
+
+	.portrait-stack {
+		position: relative;
+		aspect-ratio: 4 / 6;
+		width: 100%;
+	}
+
+	.portrait-frame-outline {
+		position: absolute;
+		inset: -1.5rem -1.5rem 1.5rem 1.5rem;
+		border: 1px solid var(--gray-700);
+		clip-path: polygon(
+			0 48px, 48px 0,
+			100% 0,
+			100% calc(100% - 48px), calc(100% - 48px) 100%,
+			0 100%
+		);
+		pointer-events: none;
 	}
 
 	.portrait-wrap {
 		position: relative;
-		aspect-ratio: 4 / 5;
-		border-radius: 1.5rem;
+		width: 100%;
+		height: 100%;
 		overflow: visible;
-		background:
-			linear-gradient(135deg, var(--gray-100) 0%, var(--gray-50) 100%);
+		background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-50) 100%);
+		clip-path: polygon(
+			0 48px, 48px 0,
+			100% 0,
+			100% calc(100% - 48px), calc(100% - 48px) 100%,
+			0 100%
+		);
 	}
 
 	.portrait {
@@ -309,8 +538,17 @@ const focusCards = [
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		border-radius: 1.5rem;
 		filter: contrast(1.05);
+	}
+
+	.portrait-slash {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		color: rgba(255, 255, 255, 0.18);
+		pointer-events: none;
+		mix-blend-mode: difference;
 	}
 
 	.portrait[src='/avatar.jpg']:not([data-loaded]) {
@@ -321,16 +559,22 @@ const focusCards = [
 		position: absolute;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
-		padding: 0.75rem 1rem;
+		padding: 0.7rem 1rem 0.7rem 0.9rem;
 		background: var(--gray-999);
 		color: var(--gray-0);
 		border: 1px solid var(--gray-200);
-		border-radius: 999rem;
 		box-shadow: var(--shadow-md);
 		z-index: 2;
-		min-width: 5rem;
+		min-width: 5.5rem;
+		clip-path: polygon(
+			0 0,
+			calc(100% - 12px) 0,
+			100% 12px,
+			100% 100%,
+			0 100%
+		);
 	}
 
 	.stat-num {
@@ -375,8 +619,8 @@ const focusCards = [
 		}
 
 		.hero-grid {
-			grid-template-columns: 6fr 5fr;
-			gap: 5rem;
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
 		}
 
 		.stat-1 {
@@ -394,36 +638,167 @@ const focusCards = [
 		}
 	}
 
-	/* ===== PARTNERS STRIP ===== */
-	.partners {
-		border-top: 1px solid var(--gray-800);
-		border-bottom: 1px solid var(--gray-800);
-		padding: 2rem 0;
-		overflow: hidden;
-		mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-		-webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+	/* ===== SPARKLES ===== */
+	.sparkle {
+		position: absolute;
+		width: 18px;
+		height: 18px;
+		animation: sparkle-twinkle 4s ease-in-out infinite;
 	}
 
-	.partners-track {
+	.sparkle-1 {
+		top: 12%;
+		left: 56%;
+		animation-delay: 0s;
+	}
+
+	.sparkle-2 {
+		top: 38%;
+		left: 8%;
+		width: 12px;
+		height: 12px;
+		animation-delay: 1.5s;
+	}
+
+	.sparkle-3 {
+		top: 78%;
+		left: 65%;
+		width: 14px;
+		height: 14px;
+		animation-delay: 2.5s;
+	}
+
+	@keyframes sparkle-twinkle {
+		0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+		50% { opacity: 0.9; transform: scale(1.1) rotate(180deg); }
+	}
+
+	/* ===== SCROLL INDICATOR ===== */
+	.scroll-indicator {
+		position: absolute;
+		bottom: -3rem;
+		left: -3.5rem;
+		display: none;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		z-index: 1;
+	}
+
+	.scroll-text {
+		writing-mode: vertical-rl;
+		font-family: var(--font-brand);
+		font-size: 0.7rem;
+		letter-spacing: 0.3em;
+		color: var(--gray-400);
+		text-transform: uppercase;
+	}
+
+	.scroll-line {
+		width: 1px;
+		height: 60px;
+		background: linear-gradient(180deg, var(--gray-500), transparent);
+	}
+
+	.scroll-circle {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		border: 1px solid var(--gray-500);
 		display: flex;
-		gap: 4rem;
-		animation: marquee 30s linear infinite;
+		align-items: center;
+		justify-content: center;
+		color: var(--gray-300);
+		font-size: 0.9rem;
+		animation: scroll-bounce 2s ease-in-out infinite;
+	}
+
+	@keyframes scroll-bounce {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(4px); }
+	}
+
+	@media (min-width: 60em) {
+		.scroll-indicator {
+			display: flex;
+		}
+	}
+
+	/* ===== DIAGONAL SKILL RIBBON ===== */
+	.skill-ribbon {
+		position: relative;
+		width: 130%;
+		margin-left: -15%;
+		padding: 1rem 0;
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.05) 15%,
+			rgba(255, 255, 255, 0.10) 50%,
+			rgba(255, 255, 255, 0.05) 85%,
+			transparent 100%
+		);
+		border-top: 1px solid rgba(255, 255, 255, 0.18);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+		transform: rotate(-4deg);
+		overflow: hidden;
+		margin-top: 5rem;
+		margin-bottom: 5rem;
+	}
+
+	/* Preserve ribbon rotation during reveal animation */
+	.skill-ribbon[data-reveal] {
+		transform: rotate(-4deg) translateY(28px);
+	}
+
+	.skill-ribbon[data-reveal].is-visible {
+		transform: rotate(-4deg) translateY(0);
+	}
+
+	/* Light mode: switch ribbon tint to dark */
+	:global(html:not(.theme-dark)) .skill-ribbon {
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(0, 0, 0, 0.04) 15%,
+			rgba(0, 0, 0, 0.07) 50%,
+			rgba(0, 0, 0, 0.04) 85%,
+			transparent 100%
+		);
+		border-top-color: rgba(0, 0, 0, 0.15);
+		border-bottom-color: rgba(0, 0, 0, 0.15);
+	}
+
+	.skill-ribbon-track {
+		display: flex;
+		gap: 2.5rem;
 		white-space: nowrap;
 		width: max-content;
+		animation: ribbon-scroll 40s linear infinite;
 	}
 
-	.partner-item {
+	.skill-tag {
+		display: inline-flex;
+		align-items: center;
+		gap: 1.25rem;
 		font-family: var(--font-brand);
 		font-weight: 500;
-		font-size: var(--text-xl);
-		color: var(--gray-300);
-		letter-spacing: 0.05em;
+		font-size: var(--text-md);
+		letter-spacing: 0.08em;
+		color: var(--gray-100);
+		text-transform: uppercase;
+	}
+
+	.ribbon-star {
+		width: 12px;
+		height: 12px;
+		color: var(--gray-400);
 		flex: 0 0 auto;
 	}
 
-	@keyframes marquee {
+	@keyframes ribbon-scroll {
 		from { transform: translateX(0); }
-		to { transform: translateX(-50%); }
+		to { transform: translateX(calc(-100% / 3)); }
 	}
 
 	/* ===== FOCUS ===== */
@@ -445,12 +820,48 @@ const focusCards = [
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		transition: all 0.3s ease;
+		transition:
+			border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			background 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.focus-card :global(svg) {
+		transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.focus-card::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(
+			circle 200px at var(--cx, 50%) var(--cy, 50%),
+			rgba(255, 255, 255, 0.06),
+			transparent 70%
+		);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		pointer-events: none;
 	}
 
 	.focus-card:hover {
-		border-color: var(--accent-regular);
-		transform: translateY(-2px);
+		border-color: rgba(255, 255, 255, 0.25);
+		transform: translateY(-6px);
+		box-shadow:
+			0 30px 60px -30px rgba(0, 0, 0, 0.6),
+			0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.focus-card:hover::before {
+		opacity: 1;
+	}
+
+	.focus-card:hover :global(svg) {
+		transform: scale(1.08) rotate(-3deg);
 	}
 
 	.focus-card h3 {
@@ -494,29 +905,59 @@ const focusCards = [
 		text-decoration: none;
 		color: inherit;
 		background: var(--gray-999_40);
-		transition: all 0.3s ease;
+		transition:
+			border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+		position: relative;
 	}
 
 	.feat-card:hover {
-		border-color: var(--accent-regular);
-		transform: translateY(-4px);
+		border-color: rgba(255, 255, 255, 0.25);
+		transform: translateY(-8px);
+		box-shadow:
+			0 40px 80px -20px rgba(0, 0, 0, 0.6),
+			0 0 0 1px rgba(255, 255, 255, 0.06) inset;
 	}
 
 	.feat-img-wrap {
 		aspect-ratio: 16 / 10;
 		overflow: hidden;
 		background: var(--gray-900);
+		position: relative;
+	}
+
+	.feat-img-wrap::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		pointer-events: none;
+	}
+
+	.feat-card:hover .feat-img-wrap::after {
+		opacity: 1;
 	}
 
 	.feat-img-wrap img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.5s ease;
+		transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.feat-card:hover .feat-img-wrap img {
-		transform: scale(1.04);
+		transform: scale(1.08);
+	}
+
+	.feat-title {
+		transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.feat-card:hover .feat-title {
+		transform: translateX(4px);
 	}
 
 	.feat-meta {
@@ -528,7 +969,7 @@ const focusCards = [
 
 	.feat-cat {
 		font-size: var(--text-sm);
-		color: var(--accent-regular);
+		color: var(--gray-300);
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 	}
@@ -599,12 +1040,37 @@ const focusCards = [
 		border-bottom: 1px solid var(--gray-800);
 		text-decoration: none;
 		color: var(--gray-0);
-		transition: all 0.2s ease;
+		transition:
+			padding 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+			background 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.cat-card :global(svg) {
+		transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+		color: var(--gray-400);
+	}
+
+	.cat-card .cat-label,
+	.cat-card .cat-num {
+		transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.cat-card:hover {
-		padding-inline: 1rem;
-		background: var(--gray-999_40);
+		padding-inline: 1.5rem;
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	.cat-card:hover :global(svg) {
+		transform: translateX(8px);
+		color: var(--gray-0);
+	}
+
+	.cat-card:hover .cat-num {
+		transform: translateX(-4px);
+	}
+
+	.cat-card:hover .cat-label {
+		transform: translateX(4px);
 	}
 
 	.cat-num {
