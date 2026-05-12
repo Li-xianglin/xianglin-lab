@@ -27,13 +27,18 @@ const skillTags = [
 const focusCards = [
 	{
 		icon: 'terminal-window',
-		title: 'B 端复杂系统',
+		title: '多业务设计经验',
 		desc: '主导从 0 到 1 的信息架构与交互设计，覆盖金融、政务、出行等多业务场景。',
 	},
 	{
 		icon: 'pencil-line',
 		title: 'Design System',
 		desc: '从 0 搭建组件规范与样式系统，提升设计与研发协作效率与一致性。',
+	},
+	{
+		icon: 'squares-four',
+		title: '跨端 / 多端体验',
+		desc: '同时驾驭 Portal / App / Miniapp 三端，统一跨端设计语言与组件体系。',
 	},
 	{
 		icon: 'rocket-launch',
@@ -139,8 +144,8 @@ const focusCards = [
 		{/* FOCUS / EXPERTISE */}
 		<section class="wrapper focus">
 			<header class="section-head" data-reveal>
-				<p class="eyebrow">EXPERTISE</p>
-				<h2 class="section-title">为复杂业务<br />设计清晰的体验。</h2>
+				<p class="eyebrow">FOCUS · 专长方向</p>
+				<h2 class="section-title">理解业务，驱动体验。</h2>
 			</header>
 			<div class="focus-grid" data-reveal-stagger>
 				{focusCards.map((c) => (
@@ -758,8 +763,8 @@ const focusCards = [
 		border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 		transform: rotate(-4deg);
 		overflow: hidden;
-		margin-top: 5rem;
-		margin-bottom: 5rem;
+		margin-top: 2.5rem;
+		margin-bottom: 2.5rem;
 	}
 
 	/* Preserve ribbon rotation during reveal animation */
@@ -893,9 +898,15 @@ const focusCards = [
 		line-height: 1.6;
 	}
 
-	@media (min-width: 60em) {
+	@media (min-width: 50em) {
 		.focus-grid {
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 75em) {
+		.focus-grid {
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
@@ -1321,7 +1332,7 @@ const focusCards = [
 	.wechat-qr img {
 		display: block;
 		width: 100%;
-		max-width: 120px;
+		max-width: 150px;
 		height: auto;
 		aspect-ratio: 1;
 		object-fit: contain;
@@ -1355,7 +1366,7 @@ const focusCards = [
 		}
 
 		.wechat-qr img {
-			max-width: 130px;
+			max-width: 170px;
 		}
 	}
 
