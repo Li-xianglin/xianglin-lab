@@ -56,12 +56,25 @@ const { Content } = await render(entry);
 			</header>
 			<main class="wrapper">
 				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					{!entry.data.gallery && entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
 					<div class="content">
 						<Content />
 					</div>
 					</div>
 			</main>
+
+			{entry.data.gallery && entry.data.gallery.length > 0 && (
+				<section class="gallery" aria-label="作品集长图浏览">
+					{entry.data.gallery.map((src, i) => (
+						<img
+							src={src}
+							alt={`${entry.data.title} — ${i + 1}`}
+							loading={i < 2 ? 'eager' : 'lazy'}
+							decoding="async"
+						/>
+					))}
+				</section>
+			)}
 		</div>
 		<ContactCTA />
 	</div>
@@ -241,6 +254,32 @@ const { Content } = await render(entry);
 
 	.external-link:hover {
 		opacity: 0.85;
+	}
+
+	/* ===== Long-scroll gallery (无缝堆叠的长图浏览) ===== */
+	.gallery {
+		display: block;
+		max-width: 1920px;
+		margin: 3rem auto 0;
+		padding: 0;
+		background: #ffffff;
+		/* 让多个切片看起来像一张连续长图：不留间隙、不加圆角 */
+	}
+
+	.gallery img {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+	}
+
+	@media (min-width: 50em) {
+		.gallery {
+			margin-top: 4rem;
+		}
 	}
 
 	@media (min-width: 50em) {
