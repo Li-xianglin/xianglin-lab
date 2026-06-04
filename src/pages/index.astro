@@ -13,11 +13,16 @@ const designOthers = all
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 const featuredProjects = [...featured, ...designOthers].slice(0, 4);
 
-const categoryCounts = (Object.keys(CATEGORIES) as CategorySlug[]).map((slug) => ({
-	slug,
-	label: CATEGORIES[slug],
-	count: all.filter((p) => p.data.category === slug).length,
-}));
+const categoryCounts = (Object.keys(CATEGORIES) as CategorySlug[]).map((slug) => {
+	const items = all.filter((p) => p.data.category === slug);
+	return {
+		slug,
+		label: CATEGORIES[slug],
+		count: items.length,
+		// 唯一一项时：直接跳详情；多项时：去 work 页对应锚点；0 项时也去锚点（看到"建设中"提示）
+		href: items.length === 1 ? `/work/${items[0].id}/` : `/work/#${slug}`,
+	};
+});
 
 const skillTags = [
 	'B 端设计', 'Design System', '海外 FinTech', '交互设计',
@@ -117,7 +122,7 @@ const focusCards = [
 							<span class="stat-label">设计经验</span>
 						</div>
 						<div class="stat stat-2">
-							<span class="stat-num">{all.length}<small>+</small></span>
+							<span class="stat-num">10<small>+</small></span>
 							<span class="stat-label">项目</span>
 						</div>
 						<div class="stat stat-3">
@@ -185,12 +190,6 @@ const focusCards = [
 					</a>
 				))}
 			</div>
-			<div class="featured-cta">
-				<CallToAction href="/work/">
-					查看全部作品
-					<Icon icon="arrow-right" size="1.2em" />
-				</CallToAction>
-			</div>
 		</section>
 
 		{/* CATEGORIES */}
@@ -201,7 +200,7 @@ const focusCards = [
 			</header>
 			<div class="cat-grid" data-reveal-stagger>
 				{categoryCounts.map((c, i) => (
-					<a class="cat-card" href={`/work/#${c.slug}`}>
+					<a class="cat-card" href={c.href}>
 						<span class="cat-num">{String(i + 1).padStart(2, '0')}</span>
 						<span class="cat-label">{c.label}</span>
 						<span class="cat-count">{c.count} 项</span>
@@ -1127,6 +1126,18 @@ const focusCards = [
 			font-size: var(--text-md);
 			-webkit-line-clamp: 3;
 			max-width: 42ch;
+		}
+
+		/* 单张精选：与作品页保持同样比例（封面图本身的 1.88:1），居左 */
+		.featured-grid .feat-card--1:only-child {
+			grid-column: 1 / 3; /* 居左：占据左 2 列 */
+			grid-row: auto;
+			aspect-ratio: 1.88 / 1;
+		}
+
+		.featured-grid .feat-card--1:only-child .feat-img-wrap img {
+			object-fit: cover;
+			object-position: center;
 		}
 
 		/* Card 2: tall 1x2 (right side, full height) */

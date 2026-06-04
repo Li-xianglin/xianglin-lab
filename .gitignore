@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# local deploy artifacts / backups (tarballs, deploy scripts)
+deploy/
+
 # dependencies
 node_modules/
 

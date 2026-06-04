@@ -129,6 +129,48 @@ const isCurrentPage = (href: string) => {
 		}
 	}
 	customElements.define('menu-button', MenuButton);
+
+	// ===== Auto-hide nav on scroll down, show on scroll up =====
+	(() => {
+		const nav = document.querySelector('nav');
+		if (!nav) return;
+		let lastY = window.scrollY;
+		let ticking = false;
+		const DELTA = 8; // ignore tiny scrolls (touchpad jitter)
+		const TOP_THRESHOLD = 80; // always show within this distance from top
+
+		const isMobileMenuOpen = () => {
+			// On mobile, the menu-button is visible and its aria-expanded reflects open state.
+			// On desktop, the button is hidden=true so this returns false.
+			const btn = nav.querySelector('button.menu-button') as HTMLButtonElement | null;
+			return !!btn && !btn.hidden && btn.getAttribute('aria-expanded') === 'true';
+		};
+
+		const update = () => {
+			const y = window.scrollY;
+
+			if (y < TOP_THRESHOLD || isMobileMenuOpen()) {
+				nav.classList.remove('nav-hidden');
+			} else if (y > lastY + DELTA) {
+				nav.classList.add('nav-hidden');
+			} else if (y < lastY - DELTA) {
+				nav.classList.remove('nav-hidden');
+			}
+			lastY = y;
+			ticking = false;
+		};
+
+		window.addEventListener(
+			'scroll',
+			() => {
+				if (!ticking) {
+					requestAnimationFrame(update);
+					ticking = true;
+				}
+			},
+			{ passive: true }
+		);
+	})();
 </script>
 
 <style>
@@ -140,10 +182,25 @@ const isCurrentPage = (href: string) => {
 		font-weight: 500;
 		margin-bottom: 3.5rem;
 		transition:
+			transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
 			background-color 0.35s ease,
 			backdrop-filter 0.35s ease,
 			border-color 0.35s ease;
 		border-bottom: 1px solid transparent;
+		will-change: transform;
+	}
+
+	nav.nav-hidden {
+		transform: translateY(-100%);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		nav {
+			transition: none;
+		}
+		nav.nav-hidden {
+			transform: none;
+		}
 	}
 
 	:global(html.is-scrolled) nav {

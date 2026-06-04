@@ -1,74 +1,81 @@
 ---
-import Icon from './Icon.astro';
-
-const currentYear = new Date().getFullYear();
+// 备案信息 —— 公安备案号通过后把 mpsBeian 改成真实号即可
+const icpBeian = '蜀ICP备2026024580号-1';
+const mpsBeian = ''; // 例：'川公网安备 51010602001234号'，留空时不显示
 ---
 
 <footer>
-	<div class="group">
-		<p>
-			用 <a href="https://astro.build/">Astro</a> 搭建
-			<Icon icon="rocket-launch" size="1.2em" />
-		</p>
-		<p>&copy; {currentYear} 李想林 / Xianglin Li</p>
-	</div>
-	<p class="socials">
-		<a href="https://github.com/Li-xianglin">GitHub</a>
-		<a href="mailto:2698956635@qq.com">邮箱</a>
+	<p class="beian">
+		<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{icpBeian}</a>
+		{mpsBeian && (
+			<>
+				<span class="sep">·</span>
+				<a
+					href={`https://beian.mps.gov.cn/#/query/webSearch?code=${mpsBeian.replace(/\D/g, '').slice(-12)}`}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img src="/beian-icon.png" alt="" class="beian-icon" />
+					{mpsBeian}
+				</a>
+			</>
+		)}
 	</p>
 </footer>
 <style>
 	footer {
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
 		margin-top: auto;
-		padding: 3rem 2rem 3rem;
+		padding: 2rem 1.5rem 2.5rem;
 		text-align: center;
-		color: var(--gray-400);
-		font-size: var(--text-sm);
 	}
 
 	footer a {
-		color: var(--gray-400);
+		color: var(--gray-500);
 		text-decoration: 1px solid underline transparent;
 		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
+		transition:
+			color 0.2s ease,
+			text-decoration-color 0.2s ease;
 	}
 
 	footer a:hover,
 	footer a:focus {
+		color: var(--gray-300);
 		text-decoration-color: currentColor;
 	}
 
-	.group {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.socials {
+	.beian {
+		margin: 0;
 		display: flex;
 		justify-content: center;
-		gap: 1rem;
+		align-items: center;
+		gap: 0.5rem;
 		flex-wrap: wrap;
+		font-size: 0.75rem;
+		color: var(--gray-500);
+		letter-spacing: 0.02em;
+		opacity: 0.85;
+	}
+
+	.beian a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+	}
+
+	.beian-icon {
+		width: 14px;
+		height: 14px;
+		vertical-align: middle;
+	}
+
+	.beian .sep {
+		color: var(--gray-700);
 	}
 
 	@media (min-width: 50em) {
 		footer {
-			flex-direction: row;
-			justify-content: space-between;
-			padding: 2.5rem 5rem;
-		}
-
-		.group {
-			flex-direction: row;
-			gap: 1rem;
-			flex-wrap: wrap;
-		}
-
-		.socials {
-			justify-content: flex-end;
+			padding: 2rem 5rem 2.5rem;
 		}
 	}
 </style>

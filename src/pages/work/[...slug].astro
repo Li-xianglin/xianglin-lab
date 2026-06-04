@@ -64,16 +64,75 @@ const { Content } = await render(entry);
 			</main>
 
 			{entry.data.gallery && entry.data.gallery.length > 0 && (
-				<section class="gallery" aria-label="作品集长图浏览">
-					{entry.data.gallery.map((src, i) => (
-						<img
-							src={src}
-							alt={`${entry.data.title} — ${i + 1}`}
-							loading={i < 2 ? 'eager' : 'lazy'}
-							decoding="async"
-						/>
-					))}
-				</section>
+				<>
+					<section class="gallery" aria-label="作品集长图浏览">
+						<div class="fs-btn-wrap">
+							<button id="fs-toggle" class="fs-btn" aria-label="进入全屏阅读" title="全屏阅读">
+								<svg class="fs-icon fs-icon-enter" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+									<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+								<svg class="fs-icon fs-icon-exit" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+									<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+							</button>
+						</div>
+						{entry.data.gallery.map((src, i) => (
+							<img
+								src={src}
+								alt={`${entry.data.title} — ${i + 1}`}
+								loading={i < 2 ? 'eager' : 'lazy'}
+								decoding="async"
+							/>
+						))}
+					</section>
+					<script>
+						(() => {
+							const btn = document.getElementById('fs-toggle');
+							if (!btn) return;
+
+							// ===== Fullscreen API =====
+							const enter = () => {
+								const el = document.documentElement;
+								const req =
+									el.requestFullscreen ||
+									(el as any).webkitRequestFullscreen ||
+									(el as any).msRequestFullscreen;
+								if (req) req.call(el);
+							};
+							const exit = () => {
+								const doc = document as any;
+								const fn =
+									doc.exitFullscreen ||
+									doc.webkitExitFullscreen ||
+									doc.msExitFullscreen;
+								if (fn) fn.call(doc);
+							};
+
+							btn.addEventListener('click', () => {
+								const fsEl =
+									document.fullscreenElement ||
+									(document as any).webkitFullscreenElement;
+								if (fsEl) exit();
+								else enter();
+							});
+
+							const onChange = () => {
+								const fsEl =
+									document.fullscreenElement ||
+									(document as any).webkitFullscreenElement;
+								btn.classList.toggle('is-fs', !!fsEl);
+								btn.setAttribute(
+									'aria-label',
+									fsEl ? '退出全屏' : '进入全屏阅读'
+								);
+								btn.setAttribute('title', fsEl ? '退出全屏 (Esc)' : '全屏阅读');
+							};
+							document.addEventListener('fullscreenchange', onChange);
+							document.addEventListener('webkitfullscreenchange', onChange);
+
+						})();
+					</script>
+				</>
 			)}
 		</div>
 		<ContactCTA />
@@ -280,6 +339,88 @@ const { Content } = await render(entry);
 		.gallery {
 			margin-top: 4rem;
 		}
+	}
+
+	/* ===== Fullscreen toggle (sticky to top of viewport while gallery is in view) ===== */
+	.fs-btn-wrap {
+		position: sticky;
+		top: 1.25rem;
+		z-index: 10;
+		display: flex;
+		justify-content: flex-end;
+		padding: 0 1.25rem;
+		height: 0; /* don't reserve vertical space, button overflows above first image */
+		pointer-events: none; /* let clicks pass through except on button */
+	}
+
+	.fs-btn {
+		pointer-events: auto;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		padding: 0;
+		border-radius: 999rem;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: saturate(180%) blur(12px);
+		-webkit-backdrop-filter: saturate(180%) blur(12px);
+		color: #1a1a1a;
+		cursor: pointer;
+		box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.25);
+		transition:
+			background 0.2s ease,
+			border-color 0.2s ease,
+			color 0.2s ease,
+			transform 0.2s ease;
+	}
+
+	.fs-btn:hover {
+		background: #ffffff;
+		border-color: rgba(0, 0, 0, 0.3);
+		transform: scale(1.06);
+	}
+
+	.fs-btn:focus-visible {
+		outline: 2px solid #1a1a1a;
+		outline-offset: 2px;
+	}
+
+	.fs-btn:focus-visible {
+		outline: 2px solid var(--gray-0);
+		outline-offset: 2px;
+	}
+
+	.fs-icon {
+		display: block;
+	}
+
+	.fs-icon-exit {
+		display: none;
+	}
+
+	.fs-btn.is-fs .fs-icon-enter {
+		display: none;
+	}
+
+	.fs-btn.is-fs .fs-icon-exit {
+		display: block;
+	}
+
+	@media (min-width: 50em) {
+		.fs-btn {
+			top: 1.5rem;
+			right: 1.5rem;
+			width: 2.75rem;
+			height: 2.75rem;
+		}
+	}
+
+	/* In fullscreen mode, hide nav/footer for immersive reading */
+	:global(:fullscreen) :global(nav),
+	:global(:fullscreen) :global(footer) {
+		display: none;
 	}
 
 	@media (min-width: 50em) {

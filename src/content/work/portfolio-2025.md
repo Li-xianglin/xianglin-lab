@@ -1,5 +1,5 @@
 ---
-title: Xianglin Li · 作品集 2022–2025
+title: Xianglin Li · 作品集 2022–2026
 description: 近年作品精选，涵盖后台系统、App、网页、可视化大屏等多业务场景的设计实践。
 publishDate: 2025-01-01 00:00:00
 category: zuopinji
@@ -9,7 +9,7 @@ tags:
   - B 端设计
   - 多业务
   - Design System
-img: /assets/portfolio/portfolio-003.jpg
+img: /assets/portfolio/portfolio-cover.jpg
 img_alt: Xianglin Li 作品集封面 — 欢迎来到我的作品集
 featured: true
 gallery:
